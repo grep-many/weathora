@@ -13,3 +13,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::selection{
+  background: white;
+  color: black;
+}
