@@ -1,23 +1,26 @@
 import Card from ".";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import getForecastWeather from "@/api/weather/forecast";
-import WeatherIcon from "../weatherIcon";
+import WeatherIcon from "@/components/weatherIcon";
+import type { Coords } from "@/schemas/weather.schema";
 
-type Props = {};
+type Props = {
+  coords: Coords;
+};
 
-const HourlyForcastCard = ({}: Props) => {
+const HourlyForcastCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
-    queryKey: ["forecast-weather"],
-    queryFn: () => getForecastWeather({ lat: 10, lon: 25 }),
+    queryKey: ["forecast-weather", coords],
+    queryFn: () => getForecastWeather({ lat: coords.lat, lon: coords.lon }),
   });
 
   return (
     <Card title="Forecast (36h)">
       <div className="flex gap-6 overflow-x-scroll">
-        {data.list.slice(0, 36).map(({ dt, weather, main }) => (
+        {data.list.slice(0, 36).map(({dt,dt_txt ,weather, main, }) => (
           <div key={dt} className="flex flex-col items-center gap-2 p-2">
             <p className="whitespace-nowrap">
-              {new Date(dt * 1000).toLocaleTimeString(undefined, {
+              {new Date(dt_txt).toLocaleTimeString(undefined, {
                 hour: "numeric",
                 minute: "2-digit",
                 hour12: true,

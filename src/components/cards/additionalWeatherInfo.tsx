@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from ".";
 import getCurrentWeather from "@/api/weather/current";
-import type { CurrentWeather } from "@/schemas/weather.schema";
+import type { Coords, CurrentWeather } from "@/schemas/weather.schema";
 import Sunrise from "@/assets/sunrise.svg?react";
 import Sunset from "@/assets/sunset.svg?react";
 import Cloud from "@/assets/cloud.svg?react";
@@ -10,12 +10,14 @@ import Pressure from "@/assets/pressure.svg?react";
 import Humidity from "@/assets/humidity.svg?react";
 import UpArrow from "@/assets/uparrow.svg?react";
 
-type Props = {};
+type Props = {
+  coords: Coords;
+};
 
-const AdditionalWeatherInfoCard = ({}: Props) => {
+const AdditionalWeatherInfoCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
-    queryKey: ["current-weather"],
-    queryFn: () => getCurrentWeather({ lat: 10, lon: 25 }),
+    queryKey: ["current-weather", coords],
+    queryFn: () => getCurrentWeather({ lat: coords.lat, lon: coords.lon }),
   });
 
   return (
@@ -63,7 +65,7 @@ const rows = [
   {
     label: "Sunrise",
     get: (data: CurrentWeather) =>
-      new Intl.DateTimeFormat("en-US", {
+      new Intl.DateTimeFormat(undefined, {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "UTC",
@@ -73,7 +75,7 @@ const rows = [
   {
     label: "Sunset",
     get: (data: CurrentWeather) =>
-      new Intl.DateTimeFormat("en-US", {
+      new Intl.DateTimeFormat(undefined, {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "UTC",

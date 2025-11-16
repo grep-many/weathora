@@ -1,14 +1,17 @@
 import Card from ".";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import getForecastWeather from "@/api/weather/forecast";
-import WeatherIcon from "../weatherIcon";
+import WeatherIcon from "@/components/weatherIcon";
+import type { Coords } from "@/schemas/weather.schema";
 
-type Props = {};
+type Props = {
+  coords: Coords;
+};
 
-const DailyForecastCard = ({}: Props) => {
+const DailyForecastCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
-    queryKey: ["forecast-weather"],
-    queryFn: () => getForecastWeather({ lat: 10, lon: 25 }),
+    queryKey: ["forecast-weather",coords],
+    queryFn: () => getForecastWeather({ lat: coords.lat, lon: coords.lon }),
   });
 
   return (
@@ -23,7 +26,7 @@ const DailyForecastCard = ({}: Props) => {
                   weekday: "short",
                 })}
               </p>
-              <WeatherIcon icon={weather[0].icon}/>
+              <WeatherIcon icon={weather[0].icon} />
               <p>{Math.round(main.temp)}°F</p>
               <p className="text-gray-500/75">{Math.round(main.temp_min)}°F</p>
               <p className="text-gray-500/75">{Math.round(main.temp_max)}°F</p>
