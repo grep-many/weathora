@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   className?: string;
 };
 
@@ -15,8 +15,8 @@ const Card = ({ children, title, className }: Props) => {
         className,
       )}
     >
+        {!!title&&<h2 className="text-2xl font-semibold">{title}</h2>}
       <main className="motion-safe:animate-[fade-in_1s_ease-out_forwards] motion-reduce:animate-none">
-        <h2 className="text-2xl font-semibold">{title}</h2>
         {children}
       </main>
     </div>
