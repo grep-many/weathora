@@ -1,8 +1,8 @@
-import { apiKey, apiUrl } from "@/config";
+import { weatherApiKey, apiUrl } from "@/config";
 
 const getForecastAirQuality = async ({ lat, lon }: { lat: number; lon: number }) => {
   const res = await fetch(
-    `${apiUrl}air_pollution/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+    `${apiUrl}air_pollution/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`
   );
   const data = await res.json();
   return data;

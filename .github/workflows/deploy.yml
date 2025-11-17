@@ -27,7 +27,9 @@ jobs:
           node-version: "22"
 
       - name: setup Environment variables
-        run: echo "VITE_API_KEY=${{secrets.REACT_APP_WEATHER_API_KEY}}">>.env
+        run: |
+          echo "VITE_WEATHER_API_KEY=${{secrets.REACT_APP_WEATHER_API_KEY}}">>.env
+          echo "VITE_TILER_API_KEY=${{secrets.VITE_TILER_API_KEY}}">>.env
 
       - name: install dependencies
         run: npm ci

@@ -120,6 +120,6 @@ export const ForecastWeatherSchema = z.object({
   }),
 });
 
-export type Coords = {lat:number,lon:number}
+export type Coords = { lat: number; lon: number };
 export type CurrentWeather = z.infer<typeof CurrentWeatherSchema>;
 export type ForecastWeather = z.infer<typeof ForecastWeatherSchema>;

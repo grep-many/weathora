@@ -1,4 +1,4 @@
-import { locations } from "@/assets/constants";
+import { locations } from "@/assets/constants/locations";
 import {
   Select,
   SelectContent,
@@ -17,9 +17,10 @@ const LocationDropDown = ({ location, setLocation }: Props) => {
   return (
     <Select value={location} onValueChange={(value) => setLocation(value)}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Theme" />
+        <SelectValue placeholder="custom" />
       </SelectTrigger>
       <SelectContent className="z-1001">
+                <SelectItem value="custom">Custom</SelectItem>
         {locations.map((city) => (
           <SelectItem key={city} value={city}>
             {city}
