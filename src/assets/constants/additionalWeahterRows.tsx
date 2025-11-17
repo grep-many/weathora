@@ -1,4 +1,4 @@
-import type { CurrentWeather } from "@/schemas/weather.schema"
+import type { CurrentWeather } from "@/schemas/weather.schema";
 import Sunrise from "@/assets/sunrise.svg?react";
 import Sunset from "@/assets/sunset.svg?react";
 import Cloud from "@/assets/cloud.svg?react";
@@ -21,7 +21,10 @@ export const additionalWeatherRows = [
   {
     label: "Wind Direction",
     get: (data: CurrentWeather) => (
-      <UpArrow className="size-8 invert" style={{ transform: `rotate(${data.wind.deg}deg)` }} />
+      <UpArrow
+        className="size-8 dark:invert"
+        style={{ transform: `rotate(${data.wind.deg}deg)` }}
+      />
     ),
     Icon: Wind,
   },

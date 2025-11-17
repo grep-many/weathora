@@ -43,17 +43,20 @@ const App = () => {
 
   return (
     <>
-      <div className="flex h-fit w-full flex-col gap-8 p-8 lg:w-[calc(100dvw-var(--sidebar-width))] min-h-[max(1140px,100vh)]">
+      <div className="flex h-fit min-h-[max(1140px,100vh)] w-full flex-col gap-8 p-4 md:p-8 lg:w-[calc(100dvw-var(--sidebar-width))]">
         <div className="flex justify-between gap-4 md:gap-8">
           <LocationDropDown location={location} setLocation={setLocation} />
           <MapTypeDropDown mapType={mapType} setMapType={setMapType} />
-          <button className="lg:hidden" onClick={() => setIsSidePanelOpen(true)}>
-            <Hamburger className="ml-auto size-6 invert" />
+          <button
+            className="bg-foreground/10 hover:bg-foreground/20 active:bg-foreground/5 rounded-sm border p-2 lg:hidden"
+            onClick={() => setIsSidePanelOpen(true)}
+          >
+            <Hamburger className="ml-auto size-4 dark:invert" />
           </button>
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4">
-          <section className="relative order-1 col-span-1 h-[50vh] md:h-[70vh] md:col-span-2 2xl:col-span-4 2xl:row-span-2 2xl:h-auto">
+          <section className="relative order-1 col-span-1 h-[55vh] md:col-span-2 md:h-[70vh] 2xl:col-span-4 2xl:row-span-2 2xl:h-auto">
             <Map coords={coordinates} onMapClick={onMapClick} layer={mapType} />
             <MapLegend mapType={mapType} />
           </section>

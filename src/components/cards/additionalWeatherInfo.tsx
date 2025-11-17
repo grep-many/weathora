@@ -4,7 +4,6 @@ import getCurrentWeather from "@/api/weather/current";
 import type { Coords } from "@/schemas/weather.schema";
 import { additionalWeatherRows } from "@/assets/constants/additionalWeahterRows";
 
-
 type Props = {
   coords: Coords;
 };
@@ -17,12 +16,12 @@ const AdditionalWeatherInfoCard = ({ coords }: Props) => {
 
   return (
     <Card title="Additional Weather Info">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {additionalWeatherRows.map(({ label, get, Icon }, i) => (
           <div key={i} className="flex justify-between">
             <div className="flex gap-4">
               <span className="text-gray-500">{label}</span>
-              <Icon className="size-8 invert" />
+              <Icon className="size-8 dark:invert" />
             </div>
             <span>{get(data)}</span>
           </div>

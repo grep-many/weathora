@@ -4,6 +4,7 @@ import type { Coords } from "@/schemas/weather.schema";
 import clsx from "clsx";
 import ChevronLeft from "@/assets/chevronLeft.svg?react";
 import SidePanelSkeleton from "../skeletons/sidePanelSkeleton";
+import ThemeToggle from "../themeToggle";
 
 type Props = {
   coords: Coords;
@@ -17,13 +18,19 @@ const SidePanel = (props: Props) => {
   return (
     <aside
       className={clsx(
-        "bg-sidebar fixed top-0 right-0 z-1001 h-screen w-full md:w-(--sidebar-width)  overflow-y-scroll px-4 py-8 shadow-md transition-transform motion-safe:duration-300 motion-reduce:duration-[0ms] lg:translate-0!",
+        "bg-sidebar fixed top-0 right-0 z-1001 h-screen w-full overflow-y-scroll px-4 py-8 shadow-md transition-transform motion-safe:duration-300 motion-reduce:duration-[0ms] md:w-(--sidebar-width) lg:translate-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full",
       )}
     >
-      <button className="lg:hidden" onClick={() => setIsSidePanelOpen(false)}>
-        <ChevronLeft className="-ml-2 size-8 invert" />
-      </button>
+      <div className="mb-3 flex items-center justify-between">
+        <button
+          className="bg-background/30 hover:bg-background/20 active:bg-background/40 rounded-full border p-1 lg:hidden"
+          onClick={() => setIsSidePanelOpen(false)}
+        >
+          <ChevronLeft className="size-8 dark:invert" />
+        </button>
+        <ThemeToggle className="top-10 right-4 lg:absolute" />
+      </div>
       <React.Suspense fallback={<SidePanelSkeleton />}>
         <AirPollutionCard {...props} />
       </React.Suspense>

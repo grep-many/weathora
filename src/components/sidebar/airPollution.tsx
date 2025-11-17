@@ -30,9 +30,9 @@ const AirPollutionCard = ({ coords }: Props) => {
         <h1 className="text-2xl font-semibold">AQI</h1>
         <Tooltip>
           <TooltipTrigger>
-            <Information className="size-4 invert" />
+            <Information className="size-4 dark:invert" />
           </TooltipTrigger>
-          <TooltipContent className="bg-background/70 text-foreground border-foreground/30 z-2000 border backdrop-blur-sm">
+          <TooltipContent className="bg-background/70 text-foreground z-2000 border backdrop-blur-sm">
             <p className="max-w-xs">
               Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 =
               Moderate, 4 = Poor, 5 = Very Poor.
@@ -77,9 +77,9 @@ const AirPollutionCard = ({ coords }: Props) => {
                   <span className="text-lg font-bold capitalize">{key}</span>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Information className="size-4 invert" />
+                      <Information className="size-4 dark:invert" />
                     </TooltipTrigger>
-                    <TooltipContent className="bg-background/70 text-foreground border-foreground/30 z-2000 border backdrop-blur-sm">
+                    <TooltipContent className="bg-background/70 text-foreground z-2000 border backdrop-blur-sm">
                       <p className="max-w-xs">
                         Concentration of {pollutantNameMapping[key.toUpperCase() as Pollutant]}
                       </p>
