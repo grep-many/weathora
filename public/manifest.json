@@ -1,6 +1,7 @@
 {
   "name": "weathora",
-  "short_name": "weathora pwa app",
+  "short_name": "weathora",
+  "description": "Modern weather app with forecasts, air quality, and geolocation",
   "icons": [
     {
       "src": "/weathora/android-chrome-192x192.png",
@@ -34,7 +35,7 @@
     }
   ],
   "start_url": ".",
-  "theme_color": "#00000000",
-  "background_color": "#00000080",
+  "theme_color": "transparent",
+  "background_color": "transparent",
   "display": "standalone"
 }
