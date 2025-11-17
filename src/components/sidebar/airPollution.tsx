@@ -1,4 +1,3 @@
-import getForecastAirQuality from "@/api/air-pollution/forecast";
 import type { Coords } from "@/schemas/weather.schema";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "../cards";
@@ -11,6 +10,7 @@ import {
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import Information from "@/assets/information.svg?react";
+import getCurrentAirQuality from "@/api/air-pollution/current";
 
 type Props = {
   coords: Coords;
@@ -19,7 +19,7 @@ type Props = {
 const AirPollutionCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
     queryKey: ["pollution", coords],
-    queryFn: () => getForecastAirQuality(coords),
+    queryFn: () => getCurrentAirQuality(coords),
   });
 
   return (
@@ -32,7 +32,7 @@ const AirPollutionCard = ({ coords }: Props) => {
           <TooltipTrigger>
             <Information className="size-4 invert" />
           </TooltipTrigger>
-          <TooltipContent className="z-2000">
+          <TooltipContent className="bg-background/70 text-foreground border-foreground/30 z-2000 border backdrop-blur-sm">
             <p className="max-w-xs">
               Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 = Good, 2 = Fair, 3 =
               Moderate, 4 = Poor, 5 = Very Poor.
@@ -79,7 +79,7 @@ const AirPollutionCard = ({ coords }: Props) => {
                     <TooltipTrigger>
                       <Information className="size-4 invert" />
                     </TooltipTrigger>
-                    <TooltipContent className="z-2000">
+                    <TooltipContent className="bg-background/70 text-foreground border-foreground/30 z-2000 border backdrop-blur-sm">
                       <p className="max-w-xs">
                         Concentration of {pollutantNameMapping[key.toUpperCase() as Pollutant]}
                       </p>
@@ -88,7 +88,7 @@ const AirPollutionCard = ({ coords }: Props) => {
                 </div>
                 <span className="text-lg font-semibold">{value}</span>
               </div>
-              <Slider min={0} max={max} value={[value]} disabled />
+              <Slider min={0} max={max} value={[value]} color={qualityColor} disabled />
               <div className="flex justify-between text-xs">
                 <p>0</p>
                 <p>{max}</p>

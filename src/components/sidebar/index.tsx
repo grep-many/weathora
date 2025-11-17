@@ -17,14 +17,14 @@ const SidePanel = (props: Props) => {
   return (
     <aside
       className={clsx(
-        "bg-sidebar fixed top-0 right-0 z-1001 h-screen w-90 overflow-y-scroll px-4 py-8 shadow-md transition-transform motion-safe:duration-300 motion-reduce:duration-[0ms]",
+        "bg-sidebar fixed top-0 right-0 z-1001 h-screen w-full md:w-(--sidebar-width)  overflow-y-scroll px-4 py-8 shadow-md transition-transform motion-safe:duration-300 motion-reduce:duration-[0ms] lg:translate-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full",
       )}
     >
-      <button onClick={() => setIsSidePanelOpen(false)}>
+      <button className="lg:hidden" onClick={() => setIsSidePanelOpen(false)}>
         <ChevronLeft className="-ml-2 size-8 invert" />
       </button>
-      <React.Suspense fallback={ <SidePanelSkeleton/>}>
+      <React.Suspense fallback={<SidePanelSkeleton />}>
         <AirPollutionCard {...props} />
       </React.Suspense>
     </aside>

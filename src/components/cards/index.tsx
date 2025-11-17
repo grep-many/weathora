@@ -11,7 +11,7 @@ const Card = ({ children, title, className }: Props) => {
   return (
     <div
       className={clsx(
-        "from-card to-card/60 flex flex-col gap-4 rounded-xl bg-linear-to-br p-4 shadow-md",
+        "from-card to-card/60 flex flex-col gap-4 rounded-xl bg-linear-to-br p-4 shadow-md 2xl:h-full",
         className,
       )}
     >

@@ -15,12 +15,12 @@ import AdditionalWeatherInfoSkeletonCard from "@/components/skeletons/additional
 import HourlyForecastSkeletonCard from "@/components/skeletons/hourlyForecastSkeleton";
 import DailyForecastSkeletonCard from "@/components/skeletons/dailyForecastSkeleton";
 import SidePanel from "@/components/sidebar";
-import Hamburger from "@/assets/hamburger.svg?react"
+import Hamburger from "@/assets/hamburger.svg?react";
 
 const App = () => {
   const [location, setLocation] = React.useState("Toronto, Canada");
   const [mapType, setMapType] = React.useState("clouds_new");
-  const [isSidePanelOpen, setIsSidePanelOpen] = React.useState(true);
+  const [isSidePanelOpen, setIsSidePanelOpen] = React.useState(false);
   const [coords, setCoords] = React.useState({
     lat: 10,
     lon: 25,
@@ -43,34 +43,41 @@ const App = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-8">
-        <div className="flex gap-8">
+      <div className="flex h-fit w-full flex-col gap-8 p-8 lg:w-[calc(100dvw-var(--sidebar-width))] min-h-[max(1140px,100vh)]">
+        <div className="flex justify-between gap-4 md:gap-8">
           <LocationDropDown location={location} setLocation={setLocation} />
           <MapTypeDropDown mapType={mapType} setMapType={setMapType} />
-          <button onClick={() => setIsSidePanelOpen(true)}>
-            <Hamburger className="ml-auto size-8 invert" />
+          <button className="lg:hidden" onClick={() => setIsSidePanelOpen(true)}>
+            <Hamburger className="ml-auto size-6 invert" />
           </button>
         </div>
-        <div className="relative">
-          <Map coords={coordinates} onMapClick={onMapClick} layer={mapType} />
-          <MapLegend mapType={mapType} />
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4">
+          <section className="relative order-1 col-span-1 h-[50vh] md:h-[70vh] md:col-span-2 2xl:col-span-4 2xl:row-span-2 2xl:h-auto">
+            <Map coords={coordinates} onMapClick={onMapClick} layer={mapType} />
+            <MapLegend mapType={mapType} />
+          </section>
+          <Suspense
+            fallback={<CurrentWeatherSkeletonCard />}
+            component={<CurrentWeatherCard coords={coords} />}
+            className="cols-span-1 order-2 2xl:row-span-2"
+          />
+          <Suspense
+            fallback={<DailyForecastSkeletonCard />}
+            component={<DailyForecastCard coords={coords} />}
+            className="cols-span-1 order-3 2xl:order-4 2xl:row-span-2"
+          />
+          <Suspense
+            fallback={<HourlyForecastSkeletonCard />}
+            component={<HourlyForcastCard coords={coords} />}
+            className="cols-span-1 order-4 md:col-span-2 2xl:order-3 2xl:row-span-1"
+          />
+          <Suspense
+            fallback={<AdditionalWeatherInfoSkeletonCard />}
+            component={<AdditionalWeatherInfoCard coords={coords} />}
+            className="cols-span-1 order-5 md:col-span-2 2xl:row-span-1"
+          />
         </div>
-        <Suspense
-          fallback={<CurrentWeatherSkeletonCard />}
-          component={<CurrentWeatherCard coords={coords} />}
-        />
-        <Suspense
-          fallback={<HourlyForecastSkeletonCard />}
-          component={<HourlyForcastCard coords={coords} />}
-        />
-        <Suspense
-          fallback={<DailyForecastSkeletonCard />}
-          component={<DailyForecastCard coords={coords} />}
-        />
-        <Suspense
-          fallback={<AdditionalWeatherInfoSkeletonCard />}
-          component={<AdditionalWeatherInfoCard coords={coords} />}
-        />
       </div>
       <SidePanel
         coords={coords}

@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import getForecastWeather from "@/api/weather/forecast";
 import WeatherIcon from "@/components/weatherIcon";
 import type { Coords } from "@/schemas/weather.schema";
+import image from "@/assets/daily-img.png";
 
 type Props = {
   coords: Coords;
@@ -16,7 +17,7 @@ const DailyForecastCard = ({ coords }: Props) => {
 
   return (
     <Card title="Daily Forecast">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-between 2xl:gap-4">
         {data.list
           .filter((item) => item.dt_txt.includes("12:00:00"))
           .map(({ dt, weather, main, dt_txt }) => (
@@ -32,6 +33,7 @@ const DailyForecastCard = ({ coords }: Props) => {
               <p className="text-gray-500/75">{Math.round(main.temp_max)}°F</p>
             </div>
           ))}
+        <img src={image} alt="daily-image" className="h-47 drop-shadow-2xl" />
       </div>
     </Card>
   );
