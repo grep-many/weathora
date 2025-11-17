@@ -4,18 +4,15 @@ import HourlyForcastCard from "@/components/cards/hourlyForecast";
 import CurrentWeatherCard from "@/components/cards/currentWeather";
 import AdditionalWeatherInfoCard from "@/components/cards/additionalWeatherInfo";
 import Map from "@/components/map";
-import LocationDropDown from "@/components/dropdowns/location";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import getGeoCode from "@/api/geoCode";
-import MapTypeDropDown from "@/components/dropdowns/mapType";
-import MapLegend from "@/components/map/legend";
 import CurrentWeatherSkeletonCard from "@/components/skeletons/currentWeatherSkeleton";
 import Suspense from "@/components/skeletons";
 import AdditionalWeatherInfoSkeletonCard from "@/components/skeletons/additionalWeatherInfoSkeleton";
 import HourlyForecastSkeletonCard from "@/components/skeletons/hourlyForecastSkeleton";
 import DailyForecastSkeletonCard from "@/components/skeletons/dailyForecastSkeleton";
 import SidePanel from "@/components/sidebar";
-import Hamburger from "@/assets/hamburger.svg?react";
+import Header from "./components/header";
 
 const App = () => {
   const [location, setLocation] = React.useState("Toronto, Canada");
@@ -36,54 +33,61 @@ const App = () => {
     setLocation("custom");
   };
 
-  const coordinates = React.useMemo(
-    () => (location === "custom" ? coords : { lat: data[0].lat, lon: data[0].lon }),
-    [location, coords],
-  );
+  React.useEffect(() => {
+    if (!("geolocation" in navigator)) return;
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCoords({ lat: latitude, lon: longitude });
+        setLocation("custom");
+      },
+      (error) => {
+        console.error(error);
+        setLocation("Toronto, Canada");
+      },
+    );
+  }, []);
+
+  const coordinates = location === "custom" ? coords : { lat: data[0].lat, lon: data[0].lon };
 
   return (
     <>
       <div className="flex h-fit min-h-[max(1140px,100vh)] w-full flex-col gap-8 p-4 md:p-8 lg:w-[calc(100dvw-var(--sidebar-width))]">
-        <div className="flex justify-between gap-4 md:gap-8">
-          <LocationDropDown location={location} setLocation={setLocation} />
-          <MapTypeDropDown mapType={mapType} setMapType={setMapType} />
-          <button
-            className="bg-foreground/10 hover:bg-foreground/20 active:bg-foreground/5 rounded-sm border p-2 lg:hidden"
-            onClick={() => setIsSidePanelOpen(true)}
-          >
-            <Hamburger className="ml-auto size-4 dark:invert" />
-          </button>
-        </div>
+        <Header
+          location={location}
+          setLocation={setLocation}
+          mapType={mapType}
+          setMapType={setMapType}
+          setIsSidePanelOpen={setIsSidePanelOpen}
+        />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4">
-          <section className="relative order-1 col-span-1 h-[55vh] md:col-span-2 md:h-[70vh] 2xl:col-span-4 2xl:row-span-2 2xl:h-auto">
-            <Map coords={coordinates} onMapClick={onMapClick} layer={mapType} />
-            <MapLegend mapType={mapType} />
-          </section>
+          <Map coords={coordinates} onMapClick={onMapClick} layer={mapType} />
           <Suspense
             fallback={<CurrentWeatherSkeletonCard />}
-            component={<CurrentWeatherCard coords={coords} />}
+            component={<CurrentWeatherCard coords={coordinates} />}
             className="cols-span-1 order-2 2xl:row-span-2"
           />
           <Suspense
             fallback={<DailyForecastSkeletonCard />}
-            component={<DailyForecastCard coords={coords} />}
+            component={<DailyForecastCard coords={coordinates} />}
             className="cols-span-1 order-3 2xl:order-4 2xl:row-span-2"
           />
           <Suspense
             fallback={<HourlyForecastSkeletonCard />}
-            component={<HourlyForcastCard coords={coords} />}
+            component={<HourlyForcastCard coords={coordinates} />}
             className="cols-span-1 order-4 md:col-span-2 2xl:order-3 2xl:row-span-1"
           />
           <Suspense
             fallback={<AdditionalWeatherInfoSkeletonCard />}
-            component={<AdditionalWeatherInfoCard coords={coords} />}
+            component={<AdditionalWeatherInfoCard coords={coordinates} />}
             className="cols-span-1 order-5 md:col-span-2 2xl:row-span-1"
           />
         </div>
       </div>
       <SidePanel
-        coords={coords}
+        coords={coordinates}
         isSidePanelOpen={isSidePanelOpen}
         setIsSidePanelOpen={setIsSidePanelOpen}
       />

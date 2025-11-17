@@ -2,7 +2,6 @@ import Card from ".";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import getForecastWeather from "@/api/weather/forecast";
 import WeatherIcon from "@/components/weatherIcon";
-import type { Coords } from "@/schemas/weather.schema";
 import image from "@/assets/daily-img.png";
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 
 const DailyForecastCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
-    queryKey: ["forecast-weather",coords],
+    queryKey: ["forecast-weather", coords],
     queryFn: () => getForecastWeather({ lat: coords.lat, lon: coords.lon }),
   });
 

@@ -1,9 +1,7 @@
 import Card from "../cards";
 import { Skeleton } from "../ui/skeleton";
 
-type Props = {};
-
-const SideCardSkeleton = ({}: Props) => {
+const SideCardSkeleton = () => {
   return (
     <Card className="from-sidebar-accent to-sidebar-accent/60 gap-0! transition-transform duration-300 hover:scale-105">
       <div className="flex flex-col gap-3">

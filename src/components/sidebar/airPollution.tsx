@@ -1,4 +1,3 @@
-import type { Coords } from "@/schemas/weather.schema";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "../cards";
 import { Slider } from "../ui/slider";
@@ -10,7 +9,7 @@ import {
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import Information from "@/assets/information.svg?react";
-import getCurrentAirQuality from "@/api/air-pollution/current";
+import getAirQuality from "@/api/airQuality";
 
 type Props = {
   coords: Coords;
@@ -19,7 +18,7 @@ type Props = {
 const AirPollutionCard = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
     queryKey: ["pollution", coords],
-    queryFn: () => getCurrentAirQuality(coords),
+    queryFn: () => getAirQuality(coords),
   });
 
   return (

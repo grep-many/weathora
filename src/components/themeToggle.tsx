@@ -1,8 +1,8 @@
-import { useTheme } from "@/context/ThemeProvider";
 import { Switch } from "./ui/switch";
 import Sun from "@/assets/sun.svg?react";
 import Moon from "@/assets/moon.svg?react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/hooks/useTheme";
 
 type Props = {
   className?: string;

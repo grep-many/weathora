@@ -24,5 +24,3 @@ export const AirPollutionSchema = z.object({
   }),
   list: z.array(AirPollutionItemSchema),
 });
-
-export type AirPollution = z.infer<typeof AirPollutionSchema>;

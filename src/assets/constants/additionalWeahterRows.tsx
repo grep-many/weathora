@@ -1,4 +1,3 @@
-import type { CurrentWeather } from "@/schemas/weather.schema";
 import Sunrise from "@/assets/sunrise.svg?react";
 import Sunset from "@/assets/sunset.svg?react";
 import Cloud from "@/assets/cloud.svg?react";

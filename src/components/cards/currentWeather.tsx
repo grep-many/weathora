@@ -2,7 +2,6 @@ import getCurrentWeather from "@/api/weather/current";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from ".";
 import WeatherIcon from "@/components/weatherIcon";
-import type { Coords } from "@/schemas/weather.schema";
 
 type Props = {
   coords: Coords;

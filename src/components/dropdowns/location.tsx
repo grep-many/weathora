@@ -20,7 +20,7 @@ const LocationDropDown = ({ location, setLocation }: Props) => {
         <SelectValue placeholder="custom" />
       </SelectTrigger>
       <SelectContent className="z-1001">
-                <SelectItem value="custom">Custom</SelectItem>
+        <SelectItem value="custom">Custom</SelectItem>
         {locations.map((city) => (
           <SelectItem key={city} value={city}>
             {city}

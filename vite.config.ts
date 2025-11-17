@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base:"/weathora",
+  base: "/weathora",
   plugins: [react(), tailwindcss(), svgr()],
   resolve: {
     alias: {
