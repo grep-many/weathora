@@ -42,8 +42,9 @@ const App = () => {
         setCoords({ lat: latitude, lon: longitude });
         setLocation("custom");
       },
+      // @ts-ignore
       (error) => {
-        console.error(error);
+        // console.error(error); //for debugging
         setLocation("Toronto, Canada");
       },
     );

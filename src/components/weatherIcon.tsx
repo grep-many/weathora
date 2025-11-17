@@ -1,4 +1,5 @@
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
+
 
 type Props = {
   icon: string;
@@ -10,7 +11,7 @@ const WeatherIcon = ({ icon, className }: Props) => {
     <img
       src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
       alt="weather-icon"
-      className={clsx("size-8", className)}
+      className={cn("size-8", className)}
     />
   );
 };

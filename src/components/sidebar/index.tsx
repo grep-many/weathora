@@ -1,10 +1,9 @@
 import React from "react";
 import AirPollutionCard from "./airPollution";
-import type { Coords } from "@/schemas/weather.schema";
-import clsx from "clsx";
 import ChevronLeft from "@/assets/chevronLeft.svg?react";
 import SidePanelSkeleton from "../skeletons/sidePanelSkeleton";
 import ThemeToggle from "../themeToggle";
+import { cn } from "@/lib/utils";
 
 type Props = {
   coords: Coords;
@@ -17,7 +16,7 @@ const SidePanel = (props: Props) => {
 
   return (
     <aside
-      className={clsx(
+      className={cn(
         "bg-sidebar fixed top-0 right-0 z-1001 h-screen w-full overflow-y-scroll px-4 py-8 shadow-md transition-transform motion-safe:duration-300 motion-reduce:duration-[0ms] md:w-(--sidebar-width) lg:translate-0!",
         isSidePanelOpen ? "translate-x-0" : "translate-x-full",
       )}

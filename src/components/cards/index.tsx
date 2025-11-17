@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
 const Card = ({ children, title, className }: Props) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         "from-card to-card/60 flex flex-col gap-4 rounded-xl bg-linear-to-br p-4 shadow-md not-dark:border 2xl:h-full",
         className,
       )}

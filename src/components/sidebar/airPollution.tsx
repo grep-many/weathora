@@ -6,10 +6,10 @@ import {
   pollutantNameMapping,
   type Pollutant,
 } from "@/assets/constants/airQualityRange";
-import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import Information from "@/assets/information.svg?react";
 import getAirQuality from "@/api/airQuality";
+import { cn } from "@/lib/utils";
 
 type Props = {
   coords: Coords;
@@ -96,7 +96,7 @@ const AirPollutionCard = ({ coords }: Props) => {
                 {Object.keys(pollutant).map((quality) => (
                   <span
                     key={quality}
-                    className={clsx(
+                    className={cn(
                       "rounded-md px-2 py-1 text-xs font-medium",
                       quality === currentLevel
                         ? `${qualityColor} text-white`
