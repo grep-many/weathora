@@ -28,8 +28,8 @@ jobs:
 
       - name: setup Environment variables
         run: |
-          echo "VITE_WEATHER_API_KEY=${{secrets.VITE_WEATHER_API_KEY}}">>.env
-          echo "VITE_TILER_API_KEY=${{secrets.VITE_TILER_API_KEY}}">>.env
+          echo "VITE_OPENWEATHER_API_KEY=${{secrets.VITE_WEATHER_API_KEY}}">>.env
+          echo "VITE_MAPTILER_KEY=${{secrets.VITE_TILER_API_KEY}}">>.env
 
       - name: install dependencies
         run: npm ci

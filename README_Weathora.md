@@ -1,7 +1,8 @@
 
 # 🌤️ Weathora
 
-![CI](https://github.com/grep-many/weathora/actions/workflows/deploy.yml/badge.svg)
+![CI](https://github.com/grep-many/weathora/actions/workflows/deploy.yml/badge.svg) 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 Weathora is a modern weather app built with **React, TypeScript, TailwindCSS, Shadcn UI, and Leaflet**, integrating the **OpenWeather API** and **MapTiler** for interactive maps. It provides **current weather**, **3-hourly forecast**, **daily forecast**, and **air quality information**.  
 
@@ -110,7 +111,7 @@ Open `http://localhost:5173/weathora` in your browser.
 - `src/api/weather/current.ts` → Fetch current weather by `lat/lon`.
 - `src/api/weather/forecast.ts` → Fetch 5-day 3-hourly forecast.
 - `src/api/airQuality.ts` → Fetch air pollution index by `lat/lon`.
-- `src/api/geoCode.ts` → fetches location names to array of `lat/lon`.
+- `src/api/geoCode.ts` → Fetch location names to array of `lat/lon`.
 
 ---
 
@@ -139,3 +140,9 @@ Open `http://localhost:5173/weathora` in your browser.
 - Map uses **dark tile layer** when in dark mode.
 - Initial location detection uses `navigator.geolocation`.
 - Fully responsive with **mobile-first TailwindCSS design**.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE) © 2025 MandarinGamer.

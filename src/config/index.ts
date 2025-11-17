@@ -1,5 +1,5 @@
-const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY;
-const tilerApiKey = import.meta.env.VITE_TILER_API_KEY;
+const weatherApiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const tilerApiKey = import.meta.env.VITE_MAPTILER_KEY;
 const airQualityUrl = ({ lat, lon }: Coords) =>
   `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherApiKey}`;
 const currentWeatherUrl = ({ lat, lon }: Coords) =>
